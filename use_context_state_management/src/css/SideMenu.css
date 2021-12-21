@@ -1,0 +1,34 @@
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.sidemenu {
+    border-right: 1px solid #333;
+}
+
+.sidemenuListItem {
+    width: 100%;
+}
+
+.sidemenuListItem + .sidemenuListItem {
+    border-top: 1px solid #333;
+}
+
+.sidemenuListItem:last-of-type {
+    border-bottom: 1px solid #333;
+}
+
+.sidemenuListItem a {
+    padding: 15px;
+    display: block;
+    text-decoration: none;
+}
+
+.sidemenuListItem a.isActive {
+    background-color: #ddd;
+}
