@@ -5,12 +5,17 @@ import {
     useEffect
 } from 'react';
 
+import { Item } from '../components/Item';
+
 const getItemList = async ( callback: React.Dispatch<React.SetStateAction<ListItem[]>> ) => {
     const itemList = await fetch( 'https://jsonplaceholder.typicode.com/photos/' )
                                         .then( response => response.json() )
                                         .then( ( json ) => {
-                                            console.log( json );
-                                            return json;
+                                            return [
+                                                json[0],
+                                                json[1],
+                                                json[2],
+                                            ];
                                         } );
 
     callback( itemList );
@@ -28,7 +33,10 @@ const Home: VFC = memo( () => {
             <h1>Home Page</h1>
             {
                 itemList.map( ( item: ListItem ) => {
-                    return <p key={item.id}>{item.id}</p>
+                    return <Item
+                                    key={item.id}
+                                    {...item}
+                                    flag={true} />
                 } )
             }
         </div>
