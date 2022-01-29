@@ -1,8 +1,8 @@
 import {
     VFC,
-    memo
+    memo,
+    useCallback
 } from 'react';
-
 import '../css/Item.css';
 
 interface Props extends ListItem {
@@ -10,6 +10,10 @@ interface Props extends ListItem {
 }
 
 const Item: VFC<Props> = memo( ( props: Props ) => {
+    const clickHandler = useCallback( () => {
+        console.log( props.id );
+    }, [] );
+
     return (
         <div className={'item ' + ( props.flag ? 'add' : 'remove' )}>
             <span className="item__id">{ props.id } : </span>
@@ -17,6 +21,7 @@ const Item: VFC<Props> = memo( ( props: Props ) => {
             <button
                 className="item__btn"
                 type="button"
+                onClick={clickHandler}
             >
                 <span className="item__btnInner">{ props.flag ? 'Add' : 'Remove' } Favorite</span>
             </button>

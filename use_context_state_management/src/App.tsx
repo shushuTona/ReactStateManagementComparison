@@ -4,12 +4,11 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import './css/App.css';
-
 import SideMenu from './components/SideMenu';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Favorite from './pages/Favorite';
+import './css/App.css';
 
 function App() {
   return (
