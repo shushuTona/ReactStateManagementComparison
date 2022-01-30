@@ -1,21 +1,31 @@
 import {
     VFC,
     memo,
-    useCallback
+    useState,
+    useCallback,
+    useContext
 } from 'react';
+import { ItemListContext } from '../state/ItemListContext';
 import '../css/Item.css';
 
-interface Props extends ListItem {
-    flag: boolean;
-}
+const Item: VFC<ListItem> = memo( ( props: ListItem ) => {
+    console.log('render Item component');
 
-const Item: VFC<Props> = memo( ( props: Props ) => {
+    const { favoriteIdList, dispatch } = useContext( ItemListContext );
+    const [favoriteFlag, setFavoriteFlag] = useState(favoriteIdList.includes( props.id ));
     const clickHandler = useCallback( () => {
-        console.log( props.id );
-    }, [] );
+        const dispatchType = favoriteFlag ? 'REMOVE_FAVORITE' : 'ADD_FAVORITE';
+
+        dispatch( {
+            type: dispatchType,
+            itemId: props.id
+        } );
+
+        setFavoriteFlag( !favoriteFlag );
+    }, [props.id, favoriteFlag, setFavoriteFlag, dispatch] );
 
     return (
-        <div className={'item ' + ( props.flag ? 'add' : 'remove' )}>
+        <div className={'item ' + ( favoriteFlag ? 'remove' : 'add' )}>
             <span className="item__id">{ props.id } : </span>
             <span className="item__text">{ props.title }</span>
             <button
@@ -23,7 +33,7 @@ const Item: VFC<Props> = memo( ( props: Props ) => {
                 type="button"
                 onClick={clickHandler}
             >
-                <span className="item__btnInner">{ props.flag ? 'Add' : 'Remove' } Favorite</span>
+                <span className="item__btnInner">{favoriteFlag ? 'Remove' : 'Add' } Favorite</span>
             </button>
         </div>
     );

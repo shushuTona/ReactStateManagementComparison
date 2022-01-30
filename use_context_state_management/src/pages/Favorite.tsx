@@ -1,34 +1,26 @@
 import {
     VFC,
     memo,
-    useState,
-    useEffect
+    useContext
 } from 'react';
-
-const getItemList = async ( callback: React.Dispatch<React.SetStateAction<ListItem[]>> ) => {
-    const itemList = await fetch( 'https://jsonplaceholder.typicode.com/photos/' )
-                                        .then( response => response.json() )
-                                        .then( ( json ) => {
-                                            console.log( json );
-                                            return json;
-                                        } );
-
-    callback( itemList );
-}
+import { ItemListContext } from '../state/ItemListContext';
+import { Item } from '../components/Item';
 
 const Favorite: VFC = memo( () => {
-    const [itemList, setItemList] = useState<ListItem[]>( [] );
+    console.log( 'render Favorite component' );
 
-    useEffect( () => {
-        getItemList( setItemList );
-    }, [] );
+    const { itemList, favoriteIdList } = useContext( ItemListContext );
 
     return (
         <div className="favorite">
             <h1>Favorite Page</h1>
             {
                 itemList.map( ( item: ListItem ) => {
-                    return <p key={item.id}>{item.id}</p>
+                    return favoriteIdList.includes( item.id )
+                                                        ? <Item
+                                                                key={item.id}
+                                                                {...item} />
+                                                        : false
                 } )
             }
         </div>

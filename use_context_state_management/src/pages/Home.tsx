@@ -1,27 +1,15 @@
 import {
     VFC,
     memo,
-    useState,
-    useEffect
+    useContext
 } from 'react';
+import { ItemListContext } from '../state/ItemListContext';
 import { Item } from '../components/Item';
 
-const getItemList = async ( callback: React.Dispatch<React.SetStateAction<ListItem[]>> ) => {
-    const itemList = await fetch( 'https://jsonplaceholder.typicode.com/photos/' )
-                                        .then( response => response.json() )
-                                        .then( ( json ) => {
-                                            return json.slice(0, 10);
-                                        } );
-
-    callback( itemList );
-}
-
 const Home: VFC = memo( () => {
-    const [itemList, setItemList] = useState<ListItem[]>([]);
+    console.log('render Home component');
 
-    useEffect( () => {
-        getItemList( setItemList );
-    }, [] );
+    const { itemList } = useContext( ItemListContext );
 
     return (
         <div className="home">
@@ -30,8 +18,7 @@ const Home: VFC = memo( () => {
                 itemList.map( ( item: ListItem ) => {
                     return <Item
                                     key={item.id}
-                                    {...item}
-                                    flag={true} />
+                                    {...item}  />
                 } )
             }
         </div>
