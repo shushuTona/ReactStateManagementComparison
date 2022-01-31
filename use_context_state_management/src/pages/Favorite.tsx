@@ -17,10 +17,10 @@ const Favorite: VFC = memo( () => {
             {
                 itemList.map( ( item: ListItem ) => {
                     return favoriteIdList.includes( item.id )
-                                                        ? <Item
-                                                                key={item.id}
-                                                                {...item} />
-                                                        : false
+                        ? <Item
+                            key={item.id}
+                            {...item} />
+                        : false
                 } )
             }
         </div>

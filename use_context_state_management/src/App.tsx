@@ -26,10 +26,10 @@ import './css/App.css';
  */
 const getItemList = async ( callback: Dispatch<SetStateAction<ListItem[]>> ) => {
   const itemList = await fetch( 'https://jsonplaceholder.typicode.com/photos/' )
-    .then( response => response.json() )
-    .then( ( json ) => {
-      return json.slice( 0, 10 );
-    } );
+                                      .then( response => response.json() )
+                                      .then( ( json ) => {
+                                        return json.slice( 0, 10 );
+                                      } );
 
   callback( itemList );
 }
