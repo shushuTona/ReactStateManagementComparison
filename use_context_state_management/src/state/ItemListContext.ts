@@ -30,31 +30,32 @@ const ItemListContext = createContext<ItemListInterface>( {} as ItemListInterfac
  * check the type of action being function's argument and process favorite item according to type.
  */
 const favoriteReducer = ( state: favoriteIdList, action: Action ) => {
+    let newState: favoriteIdList;
+
     switch ( action.type ) {
         case 'ADD_FAVORITE':
             if ( !state.includes( action.itemId ) ) {
-                state.push( action.itemId );
+                newState = [...state, action.itemId]
+                return newState;
             }
-            break;
+            return state;
 
         case 'REMOVE_FAVORITE':
-            const targetItemIndex = state.indexOf( action.itemId );
-            state.splice( targetItemIndex, 1 );
-            break;
+            return newState = state.filter( ( id: number ) => {
+                return id !== action.itemId
+            })
 
         default:
             return state;
     }
-
-    return state;
 }
 
 /**
- * useIFavoriteItem
+ * useFavoriteItem
  *
  * initialize useReducer and return state and dispatch function which process favorite item list.
  */
-const useIFavoriteItem = () => {
+const useFavoriteItem = () => {
     const [state, dispatch] = useReducer( favoriteReducer, [] );
 
     return { state, dispatch };
@@ -62,5 +63,5 @@ const useIFavoriteItem = () => {
 
 export {
     ItemListContext,
-    useIFavoriteItem
+    useFavoriteItem
 }

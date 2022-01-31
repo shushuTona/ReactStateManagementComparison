@@ -12,7 +12,7 @@ import {
   Route
 } from "react-router-dom";
 
-import { ItemListContext, useIFavoriteItem } from './state/ItemListContext';
+import { ItemListContext, useFavoriteItem } from './state/ItemListContext';
 import SideMenu from './components/SideMenu';
 import Header from './components/Header';
 import Home from './pages/Home';
@@ -38,7 +38,7 @@ const App: VFC = () => {
   console.log('render App component');
 
   const [itemList, setItemList] = useState<ListItem[]>( [] );
-  const { state, dispatch } = useIFavoriteItem();
+  const { state, dispatch } = useFavoriteItem();
 
   useEffect( () => {
     getItemList( setItemList );
