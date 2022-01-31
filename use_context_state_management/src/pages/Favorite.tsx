@@ -9,7 +9,7 @@ import { Item } from '../components/Item';
 const Favorite: VFC = memo( () => {
     console.log( 'render Favorite component' );
 
-    const { itemList, favoriteIdList } = useContext( ItemListContext );
+    const { itemList, favoriteIdList, dispatch } = useContext( ItemListContext );
 
     return (
         <div className="favorite">
@@ -19,7 +19,9 @@ const Favorite: VFC = memo( () => {
                     return favoriteIdList.includes( item.id )
                         ? <Item
                             key={item.id}
-                            {...item} />
+                            {...item}
+                            favoriteFlag={favoriteIdList.includes( item.id )}
+                            dispatch={dispatch} />
                         : false
                 } )
             }

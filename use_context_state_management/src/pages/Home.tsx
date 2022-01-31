@@ -10,7 +10,7 @@ import { Item } from '../components/Item';
 const Home: VFC = memo( () => {
     console.log('render Home component');
 
-    const { itemList } = useContext( ItemListContext );
+    const { itemList, favoriteIdList, dispatch } = useContext( ItemListContext );
 
     return useMemo( () => {
         console.log( "Re:render Home component" );
@@ -21,13 +21,15 @@ const Home: VFC = memo( () => {
                 {
                     itemList.map( ( item: ListItem ) => {
                         return <Item
-                            key={item.id}
-                            {...item} />
+                                        key={item.id}
+                                        {...item}
+                                        favoriteFlag={favoriteIdList.includes( item.id )}
+                                        dispatch={ dispatch } />
                     } )
                 }
             </div>
         )
-    }, [itemList] );
+    }, [itemList, favoriteIdList, dispatch] );
 } );
 
 export default Home;

@@ -5,7 +5,7 @@ import {
 } from 'react';
 
 type ActionType = 'ADD_FAVORITE' | 'REMOVE_FAVORITE';
-type Action = {
+export type Action = {
     type: ActionType;
     itemId: number
 }
@@ -14,7 +14,7 @@ type favoriteIdList = number[];
 export interface ItemListInterface {
     itemList: ListItem[];
     favoriteIdList: favoriteIdList;
-    dispatch: Dispatch<Action>
+    dispatch: Dispatch<Action>;
 }
 
 /**
