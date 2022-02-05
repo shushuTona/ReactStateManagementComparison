@@ -4,23 +4,14 @@ import {
     useMemo
 } from 'react';
 
+
 import {
-    DefaultRootState,
     useSelector,
     useDispatch
-} from 'react-redux'
-import { favoritedIdListType } from '../store/slice/favoritedIdListSlice';
+} from 'react-redux';
+import { StateInterface } from '../store/index';
 
 import { Item } from '../components/Item';
-
-interface StateInterface extends DefaultRootState {
-    itemList: {
-        value: ListItem[]
-    },
-    favoritedIdList: {
-        value: favoritedIdListType
-    },
-}
 
 const Home: VFC = memo( () => {
     console.log('render Home component');
