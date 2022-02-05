@@ -6,21 +6,26 @@ import {
 } from 'react';
 import '../css/Item.css';
 
+import {
+    Dispatch,
+} from 'redux';
+import {
+    addFavorite,
+    removeFavorite
+} from '../store/slice/favoritedIdListSlice';
+
 interface Props extends ListItem {
     favoriteFlag: boolean;
-    // dispatch: Dispatch<Action>;
+    dispatch: Dispatch<any>;
 }
 
 const Item: VFC<Props> = memo( ( props: Props ) => {
-    console.log('render Item component');
+    console.log( 'render Item component' );
 
     const clickHandler = useCallback( () => {
-        // const dispatchType = props.favoriteFlag ? 'REMOVE_FAVORITE' : 'ADD_FAVORITE';
+        const actionCallback = props.favoriteFlag ? removeFavorite : addFavorite;
 
-        // props.dispatch( {
-        //     type: dispatchType,
-        //     itemId: props.id
-        // } );
+        props.dispatch( actionCallback( props.id ) );
     }, [props] );
 
     return useMemo( () => {

@@ -4,14 +4,22 @@ import {
     useMemo
 } from 'react';
 
-import { DefaultRootState, useSelector } from 'react-redux'
+import {
+    DefaultRootState,
+    useSelector,
+    useDispatch
+} from 'react-redux'
+import { favoritedIdListType } from '../store/slice/favoritedIdListSlice';
 
 import { Item } from '../components/Item';
 
 interface StateInterface extends DefaultRootState {
     itemList: {
         value: ListItem[]
-    }
+    },
+    favoritedIdList: {
+        value: favoritedIdListType
+    },
 }
 
 const Home: VFC = memo( () => {
@@ -20,6 +28,10 @@ const Home: VFC = memo( () => {
     const itemList = useSelector( ( state: StateInterface ) => {
         return state.itemList.value;
     } );
+    const favoriteIdList = useSelector( ( state: StateInterface ) => {
+        return state.favoritedIdList.value;
+    } );
+    const dispatch = useDispatch();
 
     return useMemo( () => {
         console.log( "Re:render Home component" );
@@ -32,14 +44,14 @@ const Home: VFC = memo( () => {
                         return <Item
                                         key={item.id}
                                         {...item}
-                                        favoriteFlag={false}
-                                        // favoriteFlag={favoriteIdList.includes( item.id )}
-                                        />
+                                        dispatch={dispatch}
+                                        favoriteFlag={favoriteIdList.includes( item.id )}
+                        />
                     } )
                 }
             </div>
         )
-    }, [itemList] );
+    }, [itemList, favoriteIdList, dispatch] );
 } );
 
 export default Home;
