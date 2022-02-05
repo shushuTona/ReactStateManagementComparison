@@ -1,8 +1,6 @@
 import {
-  Dispatch,
-  SetStateAction,
   VFC,
-  useEffect
+  useEffect,
 } from 'react';
 
 import {
@@ -10,6 +8,9 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+
+import { setItemList } from './store/slice/itemListSlice';
+import { useDispatch } from 'react-redux';
 
 import SideMenu from './components/SideMenu';
 import Header from './components/Header';
@@ -22,22 +23,24 @@ import './css/App.css';
  *
  * get item list using fetch API from JSON placeholder API and execute callback function using 10 of the got items.
  */
-const getItemList = async ( callback: Dispatch<SetStateAction<ListItem[]>> ) => {
+const getItemList = async ( dispatch: any ) => {
   const itemList = await fetch( 'https://jsonplaceholder.typicode.com/photos/' )
                                       .then( response => response.json() )
                                       .then( ( json ) => {
                                         return json.slice( 0, 10 );
                                       } );
 
-  callback( itemList );
+  dispatch( setItemList( itemList ) );
 }
 
 const App: VFC = () => {
-  console.log('render App component');
+  console.log( 'render App component' );
+
+  const dispatch = useDispatch();
 
   useEffect( () => {
-    // getItemList( setItemList );
-  }, [] );
+    getItemList( dispatch );
+  }, [dispatch] );
 
   return (
     <main className="mainArea">

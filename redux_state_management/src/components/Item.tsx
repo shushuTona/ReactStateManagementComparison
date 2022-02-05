@@ -1,11 +1,9 @@
 import {
     VFC,
-    Dispatch,
     memo,
     useCallback,
     useMemo
 } from 'react';
-// import { Action } from '../state/ItemListContext';
 import '../css/Item.css';
 
 interface Props extends ListItem {
@@ -17,7 +15,7 @@ const Item: VFC<Props> = memo( ( props: Props ) => {
     console.log('render Item component');
 
     const clickHandler = useCallback( () => {
-        const dispatchType = props.favoriteFlag ? 'REMOVE_FAVORITE' : 'ADD_FAVORITE';
+        // const dispatchType = props.favoriteFlag ? 'REMOVE_FAVORITE' : 'ADD_FAVORITE';
 
         // props.dispatch( {
         //     type: dispatchType,
