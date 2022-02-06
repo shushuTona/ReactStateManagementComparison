@@ -4,9 +4,9 @@ import {
 } from 'react';
 
 import {
-    useSelector,
-    useDispatch
-} from 'react-redux';
+    useAppSelector,
+    useAppDispatch
+} from '../store/hooks';
 import { StateInterface } from '../store/index';
 
 import { Item } from '../components/Item';
@@ -14,13 +14,13 @@ import { Item } from '../components/Item';
 const Favorite: VFC = memo( () => {
     console.log( 'render Favorite component' );
 
-    const itemList = useSelector( ( state: StateInterface ) => {
+    const itemList = useAppSelector( ( state: StateInterface ) => {
         return state.itemList.value;
     } );
-    const favoriteIdList = useSelector( ( state: StateInterface ) => {
+    const favoriteIdList = useAppSelector( ( state: StateInterface ) => {
         return state.favoritedIdList.value;
     } );
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     return (
         <div className="favorite">

@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 import { setItemList } from './store/slice/itemListSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from './store/hooks';
 
 import SideMenu from './components/SideMenu';
 import Header from './components/Header';
@@ -36,7 +36,7 @@ const getItemList = async ( dispatch: any ) => {
 const App: VFC = () => {
   console.log( 'render App component' );
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect( () => {
     getItemList( dispatch );
