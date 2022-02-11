@@ -22,8 +22,6 @@ const initialState = {
 
 export type initialStateType = typeof initialState;
 
-console.log( setItemList.pending.type );
-
 const itemListSlice = createSlice( {
     name: 'itemList',
     initialState,
