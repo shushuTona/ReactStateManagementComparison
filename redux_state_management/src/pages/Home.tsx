@@ -3,20 +3,18 @@ import {
     memo,
     useMemo
 } from 'react';
-
 import {
     useAppSelector,
     useAppDispatch
 } from '../store/hooks';
 import { StateInterface } from '../store/index';
-
 import { Item } from '../components/Item';
 
 const Home: VFC = memo( () => {
     console.log('render Home component');
 
-    const itemList = useAppSelector( ( state: StateInterface ) => {
-        return state.itemList.value;
+    const { value, loading } = useAppSelector( ( state: StateInterface ) => {
+        return state.itemList;
     } );
     const favoriteIdList = useAppSelector( ( state: StateInterface ) => {
         return state.favoritedIdList.value;
@@ -30,18 +28,22 @@ const Home: VFC = memo( () => {
             <div className="home">
                 <h1>Home Page</h1>
                 {
-                    itemList.map( ( item: ListItem ) => {
-                        return <Item
-                                        key={item.id}
-                                        {...item}
-                                        dispatch={dispatch}
-                                        favoriteFlag={favoriteIdList.includes( item.id )}
-                        />
-                    } )
+                    loading
+                        ? <p>Loading...</p>
+                        : (
+                            value.map( ( item: ListItem ) => {
+                                return <Item
+                                                key={item.id}
+                                                {...item}
+                                                dispatch={dispatch}
+                                                favoriteFlag={favoriteIdList.includes( item.id )}
+                                />
+                            } )
+                        )
                 }
             </div>
         )
-    }, [itemList, favoriteIdList, dispatch] );
+    }, [value, loading, favoriteIdList, dispatch] );
 } );
 
 export default Home;

@@ -18,28 +18,13 @@ import Home from './pages/Home';
 import Favorite from './pages/Favorite';
 import './css/App.css';
 
-/**
- * getItemList function
- *
- * get item list using fetch API from JSON placeholder API and execute callback function using 10 of the got items.
- */
-const getItemList = async ( dispatch: any ) => {
-  const itemList = await fetch( 'https://jsonplaceholder.typicode.com/photos/' )
-                                      .then( response => response.json() )
-                                      .then( ( json ) => {
-                                        return json.slice( 0, 10 );
-                                      } );
-
-  dispatch( setItemList( itemList ) );
-}
-
 const App: VFC = () => {
   console.log( 'render App component' );
 
   const dispatch = useAppDispatch();
 
   useEffect( () => {
-    getItemList( dispatch );
+    dispatch( setItemList() );
   }, [dispatch] );
 
   return (

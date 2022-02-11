@@ -6,11 +6,15 @@ import {
 export type favoritedIdListType = number[];
 type actionType = PayloadAction<number>;
 
+const initialState = {
+    value: [] as favoritedIdListType
+}
+
+export type initialStateType = typeof initialState;
+
 const favoritedIdListSlice = createSlice( {
     name: 'favoritedIdList',
-    initialState: {
-        value: [] as favoritedIdListType
-    },
+    initialState,
     reducers: {
         addFavorite: ( state, action: actionType ) => {
             const newState: favoritedIdListType = [...state.value, action.payload];
@@ -25,6 +29,7 @@ const favoritedIdListSlice = createSlice( {
     }
 } );
 
-export const { addFavorite, removeFavorite } = favoritedIdListSlice.actions;
+const favoritedIdListReducer = favoritedIdListSlice.reducer;
 
-export default favoritedIdListSlice.reducer;
+export const { addFavorite, removeFavorite } = favoritedIdListSlice.actions;
+export { favoritedIdListReducer };

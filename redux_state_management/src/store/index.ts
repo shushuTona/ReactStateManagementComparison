@@ -1,15 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { DefaultRootState } from 'react-redux'
-import itemListReducer from './slice/itemListSlice';
-import favoritedIdListReducer, { favoritedIdListType } from './slice/favoritedIdListSlice';
+import {
+    initialStateType as itemListInitialStateType,
+    itemListReducer
+} from './slice/itemListSlice';
+import {
+    initialStateType as favoriteInitialStateType,
+    favoritedIdListReducer
+} from './slice/favoritedIdListSlice';
 
 export interface StateInterface extends DefaultRootState {
-    itemList: {
-        value: ListItem[]
-    },
-    favoritedIdList: {
-        value: favoritedIdListType
-    },
+    itemList: itemListInitialStateType,
+    favoritedIdList: favoriteInitialStateType,
 }
 
 const store = configureStore( {

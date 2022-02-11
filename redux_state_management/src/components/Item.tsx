@@ -4,15 +4,12 @@ import {
     useCallback,
     useMemo
 } from 'react';
-import '../css/Item.css';
-
-import {
-    Dispatch,
-} from 'redux';
+import { Dispatch } from 'redux';
 import {
     addFavorite,
     removeFavorite
 } from '../store/slice/favoritedIdListSlice';
+import '../css/Item.css';
 
 interface Props extends ListItem {
     favoriteFlag: boolean;
@@ -23,7 +20,9 @@ const Item: VFC<Props> = memo( ( props: Props ) => {
     console.log( 'render Item component' );
 
     const clickHandler = useCallback( () => {
-        const actionCallback = props.favoriteFlag ? removeFavorite : addFavorite;
+        const actionCallback = props.favoriteFlag
+                                                ? removeFavorite
+                                                : addFavorite;
 
         props.dispatch( actionCallback( props.id ) );
     }, [props] );

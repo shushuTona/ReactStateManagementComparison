@@ -1,19 +1,48 @@
 import {
+    createAsyncThunk,
     createSlice,
-    PayloadAction
 } from '@reduxjs/toolkit';
+
+const setItemList = createAsyncThunk(
+    'get/setItemList',
+    async (thunkAPI) => {
+        const itemList = await fetch( 'https://jsonplaceholder.typicode.com/photos/' )
+                                            .then( response => response.json() )
+                                            .then( ( json ) => {
+                                                return json.slice( 0, 30 );
+                                            } );
+        return itemList;
+    }
+);
+
+const initialState = {
+    value: [] as ListItem[],
+    loading: false
+}
+
+export type initialStateType = typeof initialState;
 
 const itemListSlice = createSlice( {
     name: 'itemList',
-    initialState: {
-        value: [] as ListItem[]
-    },
-    reducers: {
-        setItemList: ( state, action: PayloadAction<ListItem[]> ) => {
-            state.value = action.payload
+    initialState,
+    reducers: {},
+    extraReducers: {
+        [setItemList.pending as any]: ( state ) => {
+            state.loading = true;
+        },
+        [setItemList.fulfilled as any]: ( state, action ) => {
+            state.loading = false;
+            state.value = action.payload;
+        },
+        [setItemList.rejected as any]: ( state ) => {
+            state.loading = true;
         }
     }
 } );
 
-export const { setItemList } = itemListSlice.actions;
-export default itemListSlice.reducer;
+const itemListReducer = itemListSlice.reducer;
+
+export {
+    setItemList,
+    itemListReducer
+};
