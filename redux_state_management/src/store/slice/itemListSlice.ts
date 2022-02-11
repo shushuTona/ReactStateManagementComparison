@@ -22,19 +22,21 @@ const initialState = {
 
 export type initialStateType = typeof initialState;
 
+console.log( setItemList.pending.type );
+
 const itemListSlice = createSlice( {
     name: 'itemList',
     initialState,
     reducers: {},
     extraReducers: {
-        [setItemList.pending as any]: ( state ) => {
+        [setItemList.pending.type]: ( state ) => {
             state.loading = true;
         },
-        [setItemList.fulfilled as any]: ( state, action ) => {
+        [setItemList.fulfilled.type]: ( state, action ) => {
             state.loading = false;
             state.value = action.payload;
         },
-        [setItemList.rejected as any]: ( state ) => {
+        [setItemList.rejected.type]: ( state ) => {
             state.loading = true;
         }
     }
