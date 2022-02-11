@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-
 import { DefaultRootState } from 'react-redux'
 import itemListReducer from './slice/itemListSlice';
 import favoritedIdListReducer, { favoritedIdListType } from './slice/favoritedIdListSlice';

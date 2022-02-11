@@ -1,6 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {
+    createSlice,
+    PayloadAction
+} from '@reduxjs/toolkit';
 
 export type favoritedIdListType = number[];
+type actionType = PayloadAction<number>;
 
 const favoritedIdListSlice = createSlice( {
     name: 'favoritedIdList',
@@ -8,11 +12,11 @@ const favoritedIdListSlice = createSlice( {
         value: [] as favoritedIdListType
     },
     reducers: {
-        addFavorite: ( state, action ) => {
+        addFavorite: ( state, action: actionType ) => {
             const newState: favoritedIdListType = [...state.value, action.payload];
             state.value = newState;
         },
-        removeFavorite: ( state, action ) => {
+        removeFavorite: ( state, action: actionType ) => {
             const newState = state.value.filter( ( id: number ) => {
                 return id !== action.payload;
             } );

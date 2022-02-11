@@ -1,4 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {
+    createSlice,
+    PayloadAction
+} from '@reduxjs/toolkit';
 
 const itemListSlice = createSlice( {
     name: 'itemList',
@@ -6,12 +9,11 @@ const itemListSlice = createSlice( {
         value: [] as ListItem[]
     },
     reducers: {
-        setItemList: (state, action) => {
+        setItemList: ( state, action: PayloadAction<ListItem[]> ) => {
             state.value = action.payload
         }
     }
 } );
 
 export const { setItemList } = itemListSlice.actions;
-
 export default itemListSlice.reducer;
