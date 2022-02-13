@@ -24,4 +24,5 @@ Reactでの状態管理方法が色々あるから実際に触って比較して
 - `atom`と`selector`で個別にstateを作成できるのは、1つのファイルが大きくならなくて良いと感じた
 - `useRecoilState`・`useRecoilValue`・`useSetRecoilState`で必要な値を取得できるのも良い
 - 非同期処理も同じ`selector`の仕組みで実装できるのは良い
+- `Suspense`や`ErrorBoundary`というReactに備わっている方法で管理ができるのも良い
 - `reducer`の`action`で更新する方法とは違う更新方法になるから、少し手探り感が残る
