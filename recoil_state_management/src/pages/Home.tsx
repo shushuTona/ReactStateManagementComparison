@@ -20,9 +20,6 @@ const Home: VFC = memo( () => {
     console.log('render Home component');
 
     const itemList = useRecoilValue<initialStateValueType>( itemListQuery );
-    console.log('===== itemList =====');
-    console.log( itemList );
-
     const [favoritedIdList, setFavoritedIdList] = useRecoilState( favoritedIdListState );
 
     return useMemo( () => {
@@ -37,7 +34,7 @@ const Home: VFC = memo( () => {
                                 key={item.id}
                                 {...item}
                                 dispatch={setFavoritedIdList}
-                                favoriteFlag={favoritedIdList.value.includes( item.id )}
+                                favoriteFlag={favoritedIdList.includes( item.id )}
                             />
                         } )
                     }

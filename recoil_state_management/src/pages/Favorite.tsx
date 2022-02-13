@@ -19,11 +19,7 @@ import { Item } from '../components/Item';
 const Favorite: VFC = memo( () => {
     console.log( 'render Favorite component' );
 
-
     const itemList = useRecoilValue<initialStateValueType>( itemListQuery );
-    console.log( '===== itemList =====' );
-    console.log( itemList );
-
     const [favoritedIdList, setFavoritedIdList] = useRecoilState( favoritedIdListState );
 
     return useMemo( () => {
@@ -34,11 +30,11 @@ const Favorite: VFC = memo( () => {
                 <h1>Favorite Page</h1>
                     {
                         itemList.map( ( item: ListItem ) => {
-                            return favoritedIdList.value.includes( item.id )
+                            return favoritedIdList.includes( item.id )
                                 ? <Item
                                     key={item.id}
                                     {...item}
-                                    favoriteFlag={favoritedIdList.value.includes( item.id )}
+                                    favoriteFlag={favoritedIdList.includes( item.id )}
                                     dispatch={setFavoritedIdList} />
                                 : false
                         } )
