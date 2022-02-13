@@ -3,9 +3,11 @@ import {
     createSlice,
 } from '@reduxjs/toolkit';
 
-const setItemList = createAsyncThunk(
+type initialStateValueType = ListItem[];
+
+const setItemList = createAsyncThunk<initialStateValueType>(
     'get/setItemList',
-    async (thunkAPI) => {
+    async ( thunkAPI ): Promise<initialStateValueType> => {
         const itemList = await fetch( 'https://jsonplaceholder.typicode.com/photos/' )
                                             .then( response => response.json() )
                                             .then( ( json ) => {
@@ -16,7 +18,7 @@ const setItemList = createAsyncThunk(
 );
 
 const initialState = {
-    value: [] as ListItem[],
+    value: [] as initialStateValueType,
     loading: false
 }
 
