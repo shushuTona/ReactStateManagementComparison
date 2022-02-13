@@ -28,17 +28,17 @@ const Favorite: VFC = memo( () => {
         return (
             <div className="favorite">
                 <h1>Favorite Page</h1>
-                    {
-                        itemList.map( ( item: ListItem ) => {
-                            return favoritedIdList.includes( item.id )
-                                ? <Item
-                                    key={item.id}
-                                    {...item}
-                                    favoriteFlag={favoritedIdList.includes( item.id )}
-                                    dispatch={setFavoritedIdList} />
-                                : false
-                        } )
-                    }
+                {
+                    itemList.map( ( item: ListItem ) => {
+                        return favoritedIdList.includes( item.id )
+                            ? <Item
+                                key={item.id}
+                                {...item}
+                                favoriteFlag={favoritedIdList.includes( item.id )}
+                                dispatch={setFavoritedIdList} />
+                            : false
+                    } )
+                }
             </div>
         )
     }, [itemList, favoritedIdList, setFavoritedIdList] );
