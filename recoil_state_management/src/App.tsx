@@ -1,11 +1,50 @@
-import React from 'react';
+import {
+  VFC,
+  Suspense
+} from 'react';
+
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+
+import SideMenu from './components/SideMenu';
+import Header from './components/Header';
+import Home from './pages/Home';
+import Favorite from './pages/Favorite';
 import './css/App.css';
 
-function App() {
-  return (
-    <div className="App">
+const App: VFC = () => {
+  console.log( 'render App component' );
 
-    </div>
+  return (
+    <main className="mainArea">
+        <BrowserRouter>
+          <SideMenu />
+
+          <div className="contentsArea">
+            <Header />
+
+          <div className="routeArea">
+            <Suspense fallback={<p>Loading...</p>}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/favorite" element={<Favorite />} />
+                <Route
+                  path="*"
+                  element={
+                    <main style={{ padding: "1rem" }}>
+                      <p>There's nothing here!</p>
+                    </main>
+                  }
+                />
+                </Routes>
+            </Suspense>
+            </div>
+          </div>
+        </BrowserRouter>
+    </main>
   );
 }
 
